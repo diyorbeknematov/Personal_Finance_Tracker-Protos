@@ -66,7 +66,12 @@ message GetAccountReq {
 }
 
 message GetAccountResp {
-    Account account = 1;
+    string id = 1;
+    string user_id = 2;
+    string name = 3;
+    AccountType type = 4;
+    double balance = 5;
+    string currency = 6;
 }
 
 // Update Account
@@ -160,7 +165,14 @@ message GetTransactionReq {
 }
 
 message GetTransactionResp {
-    Transaction transaction = 1;
+    string id = 1;
+    string account_id = 2;
+    string user_id = 3;
+    string category_id = 4;
+    double amount = 5;
+    TypeTrnsaction type = 6;
+    string description = 7;
+    string date = 8;
 }
 
 // Update Transaction
