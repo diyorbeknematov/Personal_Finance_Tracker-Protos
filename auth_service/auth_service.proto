@@ -2,6 +2,8 @@ syntax = "proto3";
 
 option go_package = "generated/user";
 
+package auth_service;
+
 service AuthService {
     rpc GetUserProfile(GetUserProfileReq) returns (UserProfile);
     rpc UpdateUserProfile(UpdateUserProfileReq) returns (UpdateUserProfileResp);

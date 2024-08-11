@@ -1,0 +1,181 @@
+syntax = "proto3";
+
+option go_package = "generated/budgeting";
+
+package budgeting;
+
+service BudgetingService {
+    // Kategoriyalarni boshqarish
+    rpc CreateCategory(CreateCategoryReq) returns (CreateCategoryResp);
+    rpc GetCategoriesList(GetCategoriesReq) returns (GetCategoriesResp);
+    rpc GetCategory(GetCategoryReq) returns (GetCategoryResp);
+    rpc UpdateCategory(UpdateCategoryReq) returns (UpdateCategoryResp);
+    rpc DeleteCategory(DeleteCategoryReq) returns (DeleteCategoryResp);
+
+    // Byudjetni boshqarish
+    rpc CreateBudget(CreateBudgetReq) returns (CreateBudgetResp);
+    rpc GetBudgetsList(GetBudgetsReq) returns (GetBudgetsResp);
+    rpc GetBudget(GetBudgetReq) returns (GetBudgetResp);
+    rpc UpdateBudget(UpdateBudgetReq) returns (UpdateBudgetResp);
+    rpc DeleteBudget(DeleteBudgetReq) returns (DeleteBudgetResp);
+}
+
+// enum category
+enum CategoryType {
+    INCOME = 0;
+    EXPENSE = 1;
+}
+// Category
+message Category {
+    string id = 1;
+    string user_id = 2;
+    string name = 3;
+    CategoryType type = 4;
+}
+
+// CREATE Category
+message CreateCategoryReq {
+    string user_id = 1;
+    string name = 2;
+    CategoryType type = 3;
+}
+
+message CreateCategoryResp {
+    string status = 1;
+    string message = 2;
+}
+
+// GET Categories LIst
+message GetCategoriesReq {
+    string name = 1;
+    CategoryType type = 2;
+}
+
+message GetCategoriesResp {
+    repeated Category categories = 1;
+    int64 total_count = 2;
+}
+
+// GET Category By ID 
+message GetCategoryReq {
+    string id = 1;
+}
+
+message GetCategoryResp {
+    string id = 1;
+    string user_id = 2;
+    string name = 3;
+    CategoryType type = 4;
+}
+
+// UPDATE Category
+message UpdateCategoryReq {
+    string id = 1;
+    string name = 3;
+    CategoryType type = 4;
+}
+
+message UpdateCategoryResp {
+    string status = 1;
+    string message = 2;
+}
+
+// DELETE Category
+message DeleteCategoryReq {
+    string id = 1;
+    string user_id = 2;
+}
+
+message DeleteCategoryResp {
+    string status = 1;
+    string message = 2;
+}
+
+// < -------------------------------------------------------- >
+// Budgets
+enum Period {
+    DAILY = 0;
+    WEEKLY = 1;
+    MONTHLY = 2;
+    YEARLY = 3;
+}
+
+message Budget {
+    string id = 1;
+    string user_id = 2;
+    string category_id = 3;
+    double amount = 4;
+    Period period = 5;
+    string start_date = 6;
+    string end_date = 7;
+}
+
+// CREATE Budget
+message CreateBudgetReq {
+    string user_id = 1;
+    string category_id = 2;
+    double amount = 3;
+    Period period = 4;
+    string start_date = 5;
+    string end_date = 6;
+}
+
+message CreateBudgetResp {
+    string status = 1;
+    string message = 2;
+}
+
+// GET Budgets List
+message GetBudgetsReq {
+    string user_id = 1;
+    string category_id = 2;
+    Period period = 3;
+    string start_date = 4;
+    string end_date = 5;
+}
+
+message GetBudgetsResp {
+    repeated Budget budgets = 1;
+    int64 total_count = 2;
+}
+
+// GET Budget By ID 
+message GetBudgetReq {
+    string id = 1;
+}
+
+message GetBudgetResp {
+    string id = 1;
+    string user_id = 2;
+    string category_id = 3;
+    double amount = 4;
+    Period period = 5;
+    string start_date = 6;
+    string end_date = 7;
+}
+
+// UPDATE Budget
+message UpdateBudgetReq {
+    string id = 1;
+    string category_id = 2;
+    double amount = 3;
+    Period period = 4;
+    string start_date = 5;
+    string end_date = 6;
+}
+
+message UpdateBudgetResp {
+    string status = 1;
+    string message = 2;
+}
+
+// DELETE Budget
+message DeleteBudgetReq {
+    string id = 1;
+    string user_id = 2;
+}
+
+message DeleteBudgetResp {
+    string status = 1;
+    string message = 2;
+}

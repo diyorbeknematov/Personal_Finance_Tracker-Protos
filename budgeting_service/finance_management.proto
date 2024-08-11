@@ -1,0 +1,189 @@
+syntax = "proto3";
+
+option go_package = "generated/budgeting";
+
+package finance_management;
+
+service FinanceManagementService {
+    // Moliyaviy hisoblarni boshqarish
+    rpc CreateAccount(CreateAccountReq) returns (CreateAccountResp);
+    rpc UpdateAccount(UpdateAccountReq) returns (UpdateAccountResp);
+    rpc GetAccount(GetAccountReq) returns (GetAccountResp);
+    rpc GetAccountsList(GetAccountsListReq) returns (GetAccountsListResp);
+    rpc DeleteAccount(DeleteAccountReq) returns (DeleteAccountResp);
+
+    // Tranzaksiyalarni boshqarish:
+    rpc CreateTransaction(CreateTransactionReq) returns (CreateTransactionResp);
+    rpc UpdateTransaction(UpdateTransactionReq) returns (UpdateTransactionResp);
+    rpc GetTransaction(GetTransactionReq) returns (GetTransactionResp);
+    rpc GetTransactionsList(GetTransactionsListReq) returns (GetTransactionsListResp);
+    rpc DeleteTransaction(DeleteTransactionReq) returns (DeleteTransactionResp);
+}
+
+enum AccountType {
+    CHECKING = 0;
+    SAVINGS = 1;
+    CREDIT_CARD = 2;
+    CASH = 3;
+} 
+
+message Account {
+    string id = 1;
+    string user_id = 2;
+    string name = 3;
+    AccountType type = 4;
+    double balance = 5;
+    string currency = 6;
+}
+
+
+message CreateAccountReq {
+    string user_id = 2;
+    string name = 3;
+    AccountType type = 4;
+    double balance = 5;
+    string currency = 6;
+}
+
+message CreateAccountResp {
+    string status = 1;
+    string message = 2;
+}
+
+// GET accounts lis
+message GetAccountsListReq {
+    string user_id = 1;
+}
+
+message GetAccountsListResp {
+    repeated Account accounts = 1;
+}
+
+// GET account by ID
+message GetAccountReq {
+    string id = 1;
+    string user_id = 2;
+}
+
+message GetAccountResp {
+    Account account = 1;
+}
+
+// Update Account
+message UpdateAccountReq {
+    string id = 1;
+    string user_id = 2;
+    string name = 3;
+    AccountType type = 4;
+    double balance = 5;
+    string currency = 6;
+}
+
+message UpdateAccountResp {
+    string status = 1;
+    string message = 2;
+}
+
+// DELETE Account
+message DeleteAccountReq {
+    string id = 1;
+    string user_id = 2;
+}
+
+message DeleteAccountResp {
+    string status = 1;
+    string message = 2;
+}
+
+
+// < ----------------------------------------------------- >
+// Transaction enum
+enum TypeTrnsaction {
+    INCOME = 0;
+    EXPENSE = 1;
+}
+
+// Transaction
+message Transaction {
+    string id = 1;
+    string account_id = 2;
+    string user_id = 3;
+    string category_id = 4;
+    double amount = 5;
+    TypeTrnsaction type = 6;
+    string description = 7;
+    string date = 8;
+}
+
+// Create Transaction
+message CreateTransactionReq {
+    string id = 1;
+    string account_id = 2;
+    string user_id = 3;
+    string category_id = 4;
+    double amount = 5;
+    TypeTrnsaction type = 6;
+    string description = 7;
+    string date = 8;
+}
+
+message CreateTransactionResp {
+    string status = 1;
+    string message = 2;
+}
+
+// Get Transactions list
+message GetTransactionsListReq {
+    string username = 1;
+    string account_name = 2;
+    string category_name = 3;
+    double amount = 4;
+    TypeTrnsaction type = 5;
+    string description = 6;
+    string date_from = 7;
+    string date_to = 8;
+    int64 page = 9;
+    int64 limit = 10;
+}
+
+message GetTransactionsListResp {
+    repeated Transaction transactions = 1;
+    int64 total_count = 2;
+    int64 page = 3;
+    int64 limit = 4;
+}
+
+// Get Transaction by ID
+message GetTransactionReq {
+    string id = 1;
+    string user_id = 2;
+}
+
+message GetTransactionResp {
+    Transaction transaction = 1;
+}
+
+// Update Transaction
+message UpdateTransactionReq {
+    string id = 1;
+    double amount = 2;
+    TypeTrnsaction type = 3;
+    string description = 4;
+    string date = 5;
+}
+
+message UpdateTransactionResp {
+    string status = 1;
+    string message = 2;
+}
+
+// DELETE Transaction
+message DeleteTransactionReq {
+    string id = 1;
+    string user_id = 2;
+}
+
+message DeleteTransactionResp {
+    string status = 1;
+    string message = 2;
+}

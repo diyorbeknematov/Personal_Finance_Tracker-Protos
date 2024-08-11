@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+option go_package = "generated/budgeting";
+
+package goals_management;
+
+service GoalsManagemenService {
+    // Moliyaviy maqsadlarni boshqarish
+    rpc CreateGoal(CreateGoalReq) returns (CreateGoalResp);
+    rpc GetGoals(GetGoalsReq) returns (GetGoalsResp);
+    rpc GetGoal(GetGoalReq) returns (GetGoalResp);
+    rpc UpdateGoal(UpdateGoalReq) returns (UpdateGoalResp);
+    rpc DeleteGoal(DeleteGoalReq) returns (DeleteGoalResp);
+}
+
+// Goals
+enum Status {
+    INPORGRESS = 0;
+    ACHIEVED = 1;
+    FAILED = 2;
+}
+
+message Goal {
+    string id = 1;
+    string user_id = 2;
+    string name = 3;
+    double target_amount = 4;
+    double current_amount = 5;
+    string deadline = 6;
+    Status status = 7;
+}
+
+// Create Goals
+message CreateGoalReq {
+    string user_id = 1;
+    string name = 2;
+    double target_amount = 3;
+    double current_amount = 4;
+    string deadline = 5;
+    Status status = 6;
+}
+
+message CreateGoalResp {
+    string status = 1;
+    string message = 2;
+}
+
+// GET Goals list
+message GetGoalsReq {
+    string user_id = 1;
+    string name = 2;
+    double target_amount = 3;
+    string deadline = 4;
+    Status status = 5;
+    int64 page_number = 6;
+    int64 page_size = 7;
+}
+
+message GetGoalsResp {
+    repeated Goal goals = 1;
+    int64 total_count = 2;
+    int64 page_number = 3;
+    int64 page_size = 4;
+}
+
+// Get Goal by ID
+message GetGoalReq {
+    string id = 1;
+    string user_id = 2;
+}
+
+message GetGoalResp {
+    string id = 1;
+    string user_id = 2;
+    string name = 3;
+    double target_amount = 4;
+    double current_amount = 5;
+    string deadline = 6;
+    Status status = 7;
+}
+
+// Update Goals
+message UpdateGoalReq {
+    string id = 1;
+    string name = 2;
+    double target_amount = 3;
+    string deadline = 4;
+    Status status = 5;
+}
+
+message UpdateGoalResp {
+    string status = 1;
+    string message = 2;
+}
+
+// Delete Goals
+message DeleteGoalReq {
+    string id = 1;
+}
+
+message DeleteGoalResp {
+    string status = 1;
+    string message = 2;
+}
