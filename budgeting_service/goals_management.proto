@@ -52,15 +52,15 @@ message GetGoalsReq {
     double target_amount = 3;
     string deadline = 4;
     Status status = 5;
-    int64 page_number = 6;
-    int64 page_size = 7;
+    int64 page = 6;
+    int64 limit = 7;
 }
 
 message GetGoalsResp {
     repeated Goal goals = 1;
     int64 total_count = 2;
-    int64 page_number = 3;
-    int64 page_size = 4;
+    int64 page = 3;
+    int64 limit = 4;
 }
 
 // Get Goal by ID

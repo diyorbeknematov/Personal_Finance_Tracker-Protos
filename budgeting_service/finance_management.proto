@@ -53,10 +53,20 @@ message CreateAccountResp {
 // GET accounts lis
 message GetAccountsListReq {
     string user_id = 1;
+    string name = 2;
+    string type = 3;
+    string currency = 4;
+    double balance = 5;
+    bool created_at = 6;
+    int64 limit = 7;
+    int64 offset = 8;
 }
 
 message GetAccountsListResp {
     repeated Account accounts = 1;
+    int64 offset = 2;
+    int64 limit = 3;
+    int64 total_count = 4;
 }
 
 // GET account by ID
@@ -139,7 +149,7 @@ message CreateTransactionResp {
 
 // Get Transactions list
 message GetTransactionsListReq {
-    string username = 1;
+    string user_id = 1;
     string account_name = 2;
     string category_name = 3;
     double amount = 4;

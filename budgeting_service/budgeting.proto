@@ -47,13 +47,18 @@ message CreateCategoryResp {
 
 // GET Categories LIst
 message GetCategoriesReq {
-    string name = 1;
-    CategoryType type = 2;
+    string user_id = 1;
+    string name = 2;
+    CategoryType type = 3;
+    int64 limit = 4;
+    int64 page = 5;
 }
 
 message GetCategoriesResp {
     repeated Category categories = 1;
     int64 total_count = 2;
+    int64 page = 3;
+    int64 limit = 4;
 }
 
 // GET Category By ID 
@@ -128,15 +133,20 @@ message CreateBudgetResp {
 // GET Budgets List
 message GetBudgetsReq {
     string user_id = 1;
-    string category_id = 2;
+    string categore_name = 2;
     Period period = 3;
-    string start_date = 4;
-    string end_date = 5;
+    double amount = 4;
+    string start_date = 5;
+    string end_date = 6;
+    int64 limit = 7;
+    int64 page = 8;
 }
 
 message GetBudgetsResp {
     repeated Budget budgets = 1;
     int64 total_count = 2;
+    int64 page = 3;
+    int64 limit = 4;
 }
 
 // GET Budget By ID 
