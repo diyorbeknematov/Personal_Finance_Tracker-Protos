@@ -20,18 +20,12 @@ service FinanceManagementService {
     rpc DeleteTransaction(DeleteTransactionReq) returns (DeleteTransactionResp);
 }
 
-enum AccountType {
-    CHECKING = 0;
-    SAVINGS = 1;
-    CREDIT_CARD = 2;
-    CASH = 3;
-} 
 
 message Account {
     string id = 1;
     string user_id = 2;
     string name = 3;
-    AccountType type = 4;
+    string type = 4;
     double balance = 5;
     string currency = 6;
 }
@@ -40,7 +34,7 @@ message Account {
 message CreateAccountReq {
     string user_id = 2;
     string name = 3;
-    AccountType type = 4;
+    string type = 4;
     double balance = 5;
     string currency = 6;
 }
@@ -79,7 +73,7 @@ message GetAccountResp {
     string id = 1;
     string user_id = 2;
     string name = 3;
-    AccountType type = 4;
+    string type = 4;
     double balance = 5;
     string currency = 6;
 }
@@ -89,7 +83,7 @@ message UpdateAccountReq {
     string id = 1;
     string user_id = 2;
     string name = 3;
-    AccountType type = 4;
+    string type = 4;
     double balance = 5;
     string currency = 6;
 }
@@ -112,11 +106,6 @@ message DeleteAccountResp {
 
 
 // < ----------------------------------------------------- >
-// Transaction enum
-enum TypeTrnsaction {
-    INCOME = 0;
-    EXPENSE = 1;
-}
 
 // Transaction
 message Transaction {
@@ -125,7 +114,7 @@ message Transaction {
     string user_id = 3;
     string category_id = 4;
     double amount = 5;
-    TypeTrnsaction type = 6;
+    string type = 6;
     string description = 7;
     string date = 8;
 }
@@ -137,7 +126,7 @@ message CreateTransactionReq {
     string user_id = 3;
     string category_id = 4;
     double amount = 5;
-    TypeTrnsaction type = 6;
+    string type = 6;
     string description = 7;
     string date = 8;
 }
@@ -153,7 +142,7 @@ message GetTransactionsListReq {
     string account_name = 2;
     string category_name = 3;
     double amount = 4;
-    TypeTrnsaction type = 5;
+    string type = 5;
     string description = 6;
     string date_from = 7;
     string date_to = 8;
@@ -180,7 +169,7 @@ message GetTransactionResp {
     string user_id = 3;
     string category_id = 4;
     double amount = 5;
-    TypeTrnsaction type = 6;
+    string type = 6;
     string description = 7;
     string date = 8;
 }
@@ -189,7 +178,7 @@ message GetTransactionResp {
 message UpdateTransactionReq {
     string id = 1;
     double amount = 2;
-    TypeTrnsaction type = 3;
+    string type = 3;
     string description = 4;
     string date = 5;
 }

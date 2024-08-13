@@ -13,13 +13,6 @@ service GoalsManagemenService {
     rpc DeleteGoal(DeleteGoalReq) returns (DeleteGoalResp);
 }
 
-// Goals
-enum Status {
-    INPORGRESS = 0;
-    ACHIEVED = 1;
-    FAILED = 2;
-}
-
 message Goal {
     string id = 1;
     string user_id = 2;
@@ -27,7 +20,7 @@ message Goal {
     double target_amount = 4;
     double current_amount = 5;
     string deadline = 6;
-    Status status = 7;
+    string status = 7;
 }
 
 // Create Goals
@@ -37,7 +30,7 @@ message CreateGoalReq {
     double target_amount = 3;
     double current_amount = 4;
     string deadline = 5;
-    Status status = 6;
+    string status = 6;
 }
 
 message CreateGoalResp {
@@ -51,7 +44,7 @@ message GetGoalsReq {
     string name = 2;
     double target_amount = 3;
     string deadline = 4;
-    Status status = 5;
+    string status = 5;
     int64 page = 6;
     int64 limit = 7;
 }
@@ -76,7 +69,7 @@ message GetGoalResp {
     double target_amount = 4;
     double current_amount = 5;
     string deadline = 6;
-    Status status = 7;
+    string status = 7;
 }
 
 // Update Goals
@@ -85,7 +78,7 @@ message UpdateGoalReq {
     string name = 2;
     double target_amount = 3;
     string deadline = 4;
-    Status status = 5;
+    string status = 5;
 }
 
 message UpdateGoalResp {

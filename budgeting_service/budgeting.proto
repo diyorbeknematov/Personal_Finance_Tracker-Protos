@@ -20,24 +20,20 @@ service BudgetingService {
     rpc DeleteBudget(DeleteBudgetReq) returns (DeleteBudgetResp);
 }
 
-// enum category
-enum CategoryType {
-    INCOME = 0;
-    EXPENSE = 1;
-}
+
 // Category
 message Category {
     string id = 1;
     string user_id = 2;
     string name = 3;
-    CategoryType type = 4;
+    string type = 4;
 }
 
 // CREATE Category
 message CreateCategoryReq {
     string user_id = 1;
     string name = 2;
-    CategoryType type = 3;
+    string type = 3;
 }
 
 message CreateCategoryResp {
@@ -49,7 +45,7 @@ message CreateCategoryResp {
 message GetCategoriesReq {
     string user_id = 1;
     string name = 2;
-    CategoryType type = 3;
+    string type = 3;
     int64 limit = 4;
     int64 page = 5;
 }
@@ -70,14 +66,14 @@ message GetCategoryResp {
     string id = 1;
     string user_id = 2;
     string name = 3;
-    CategoryType type = 4;
+    string type = 4;
 }
 
 // UPDATE Category
 message UpdateCategoryReq {
     string id = 1;
     string name = 3;
-    CategoryType type = 4;
+    string type = 4;
 }
 
 message UpdateCategoryResp {
@@ -97,20 +93,13 @@ message DeleteCategoryResp {
 }
 
 // < -------------------------------------------------------- >
-// Budgets
-enum Period {
-    DAILY = 0;
-    WEEKLY = 1;
-    MONTHLY = 2;
-    YEARLY = 3;
-}
 
 message Budget {
     string id = 1;
     string user_id = 2;
     string category_id = 3;
     double amount = 4;
-    Period period = 5;
+    string period = 5;
     string start_date = 6;
     string end_date = 7;
 }
@@ -120,7 +109,7 @@ message CreateBudgetReq {
     string user_id = 1;
     string category_id = 2;
     double amount = 3;
-    Period period = 4;
+    string period = 4;
     string start_date = 5;
     string end_date = 6;
 }
@@ -134,7 +123,7 @@ message CreateBudgetResp {
 message GetBudgetsReq {
     string user_id = 1;
     string categore_name = 2;
-    Period period = 3;
+    string period = 3;
     double amount = 4;
     string start_date = 5;
     string end_date = 6;
@@ -159,7 +148,7 @@ message GetBudgetResp {
     string user_id = 2;
     string category_id = 3;
     double amount = 4;
-    Period period = 5;
+    string period = 5;
     string start_date = 6;
     string end_date = 7;
 }
@@ -169,7 +158,7 @@ message UpdateBudgetReq {
     string id = 1;
     string category_id = 2;
     double amount = 3;
-    Period period = 4;
+    string period = 4;
     string start_date = 5;
     string end_date = 6;
 }
