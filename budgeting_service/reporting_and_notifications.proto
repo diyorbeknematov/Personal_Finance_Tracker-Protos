@@ -11,9 +11,11 @@ service ReportingNotificationService {
     rpc GoalProgress(GetGoalProgressReq) returns (GetGoalProgressResp);
 
     // Notification
-    rpc SendNotification(NotificationReq) returns (NotificationResp);
-    rpc GetNotificationList(GetNotificationReq) returns (GetNotificationResp);
-    rpc GetNotification(GetNotificationByIdReq) returns (GetNotificationByIdResp);
+    rpc SendNotification(SendNotificationReq) returns (SendNotificationResp);
+    rpc GetNotificationList(GetNotificationsListReq) returns (GetNotificationsListResp);
+    rpc GetNotification(GetNotificationReq) returns (GetNotificationResp);
+    rpc UpdateNotification(UpdateNotificationReq) returns (UpdateNotificationResp);
+    rpc DeleteNotification(DeleteNotificationReq) returns (DeleteNotificationResp);
 }
 
 // Reporting
@@ -81,36 +83,63 @@ message GoalProgress {
 }
 
 // Notification
-message NotificationReq {
+message SendNotificationReq {
     string user_id = 1;
     string type = 2;
-    string content = 3;
+    string message = 3;
+    string status = 4;
 }
 
-message NotificationResp {
-    bool success = 1;
+message SendNotificationResp {
+    string status = 1;
+    string message = 2;
 }
 
 message GetNotificationReq {
-    string user_id = 1;
+    string id = 1;
 }
 
 message GetNotificationResp {
+    string id = 1;
+    string type = 2;
+    string message = 3;
+    string status = 4;
+    bool is_read = 5;
+    string created_at = 6;
+}
+
+message GetNotificationsListReq {
+    string user_id = 1;
+}
+
+message GetNotificationsListResp {
     repeated Notification notification_list = 1;
 }
 
 message Notification {
-    string type = 1;
-    string content = 2;
+    string id = 1;
+    string type = 2;
+    string message = 3;
+    string status = 4;
+    bool is_read = 5;
+    string created_at = 6;
 }
 
-// Get Notification by id
-message GetNotificationByIdReq {
-    string user_id = 1;
-    int32 notification_id = 2;
+message DeleteNotificationReq {
+    string id = 1;
 }
 
-message GetNotificationByIdResp {
-    string type = 1;
-    string content = 2;
+message DeleteNotificationResp {
+    string status = 1;
+    string message = 2;
+}
+
+message UpdateNotificationReq {
+    string id = 1;
+    bool is_read = 2;
+}
+
+message UpdateNotificationResp {
+    string status = 1;
+    string message = 2;
 }
