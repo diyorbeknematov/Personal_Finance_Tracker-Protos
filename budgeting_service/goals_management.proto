@@ -59,7 +59,6 @@ message GetGoalsResp {
 // Get Goal by ID
 message GetGoalReq {
     string id = 1;
-    string user_id = 2;
 }
 
 message GetGoalResp {
