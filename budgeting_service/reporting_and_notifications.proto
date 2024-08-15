@@ -38,7 +38,7 @@ message GetIncomeReportReq {
 }
 
 message GetIncomeReportResp {
-    string user_id = 1;
+    double total_amount = 1;
     bool yearly = 2;
     bool monthly = 3;
 }
